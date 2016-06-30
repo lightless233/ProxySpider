@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-import time
 
 __author__ = "lightless"
 __email__ = "root@lightless.me"
@@ -9,7 +8,7 @@ __email__ = "root@lightless.me"
 爬虫插件类
 
 命名规则：
-      文件名与类名相同。
+      文件名与类名相同。因为本文件仅作为示例，所以文件名以下划线开头，在编写自己的插件时请注意，以下划线开头的插件文件是不会被加载进框架的。
 
 实现函数：
       __init__
