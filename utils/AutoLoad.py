@@ -14,7 +14,7 @@ class AutoLoad:
         self.results = Queue.Queue(maxsize=0)
 
     def __check_filename(self, filename):
-        if not filename.endswith(".py") or filename.startswith("__"):
+        if not filename.endswith(".py") or filename.startswith("_"):
             return False
         else:
             return True

@@ -12,7 +12,7 @@ __email__ = "root@lightless.me"
 if __name__ == "__main__":
     # 加载爬虫插件
     al = AutoLoad()
-    al.load(["ExampleSpider"])
+    al.load()
 
     print "Loaded spider: ",
     for s in al.spiders:
@@ -49,8 +49,3 @@ if __name__ == "__main__":
                 line = r['ip'] + "," + r['port'] + "," + r['type'] + "," + r['location'] + "," + r['time']
                 print "[*]", line
                 ff.writelines((line+"\n").encode("utf8"))
-
-    # test
-
-
-
