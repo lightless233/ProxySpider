@@ -46,6 +46,8 @@ class ExampleSpider:
         self.url = "Your url here."
         # 代理类型，包括HTTP，shadowsocks，VPN
         self.type = "HTTP"
+        # 一些你自己的备注，建议填写以作区分
+        self.tag = "鲲鹏-全球-高匿代理"
         # Result Queue
         self.result_queue = None
 
