@@ -45,10 +45,11 @@ if __name__ == "__main__":
         while not al.results.empty():
             res = al.results.get_nowait()
             ff.writelines(res[0]['url'] + "\n")
-            ff.writelines("ip,port,type,location,time(s)\n")
+            ff.writelines("ip,port,type,protocol,location,time(s)\n")
             print "[*] url:", res[0]['url']
             res = res[1]
             for r in res:
-                line = r['ip'] + "," + r['port'] + "," + r['type'] + "," + r['location'] + "," + r['time']
+                line = r['ip'] + "," + r['port'] + "," + r['type'] + "," + r['protocol'] + ","\
+                       + r['location'] + "," + r['time']
                 print "[*]", line
                 ff.writelines((line+"\n").encode("utf8"))

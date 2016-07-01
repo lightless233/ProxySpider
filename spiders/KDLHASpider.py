@@ -12,7 +12,7 @@ __email__ = "root@lightless.me"
 class KDLHASpider:
     def __init__(self):
         self.url = "http://www.kuaidaili.com/free/inha/"
-        self.tag = "快代理-国内-高匿"
+        self.tag = "快代理-每日更新"
         self.type = "HTTP"
         self.result_queue = None
 
@@ -26,7 +26,7 @@ class KDLHASpider:
         t_result = []
         for page in xrange(1, 11):
             url = raw_url.replace("{page}", str(page))
-
+            print url
             cur_path = os.getcwd()
             cur_path += os.sep + "spiders" + os.sep + "phantomjs.exe"
             driver = webdriver.PhantomJS(executable_path=cur_path)
@@ -42,6 +42,7 @@ class KDLHASpider:
                 each_item['ip'] = td[0].get_text()
                 each_item['port'] = td[1].get_text()
                 each_item['type'] = td[2].get_text()
+                each_item['protocol'] = td[3].get_text().replace(", ", "-")
                 each_item['location'] = td[5].get_text()
                 each_item['time'] = filter(lambda ch: ch in '0123456789.', td[6].get_text().encode("utf8"))
                 t_result.append(each_item)
