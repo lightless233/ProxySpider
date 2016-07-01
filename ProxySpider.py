@@ -15,7 +15,10 @@ sys.setdefaultencoding("utf-8")
 if __name__ == "__main__":
     # 加载爬虫插件
     al = AutoLoad()
+    # 如果没有参数，加载全部插件
     al.load()
+    # 如果想加载指定插件，可采用下面的写法
+    # al.load(cls=["KPSpider"])
 
     print "Loaded spider: ",
     for s in al.spiders:
@@ -41,15 +44,16 @@ if __name__ == "__main__":
 
         # 写入BOM头
         ff.write(codecs.BOM_UTF8)
-
+        # TODO: fix get value from dict
         while not al.results.empty():
             res = al.results.get_nowait()
-            ff.writelines(res[0]['url'] + "\n")
+            ff.writelines(res[0].get('url') + "\n")
             ff.writelines("ip,port,type,protocol,location,time(s)\n")
-            print "[*] url:", res[0]['url']
+            print "[*] url:", res[0].get('url')
             res = res[1]
             for r in res:
-                line = r['ip'] + "," + r['port'] + "," + r['type'] + "," + r['protocol'] + ","\
-                       + r['location'] + "," + r['time']
+                line = r.get('ip', 'None') + "," + r.get('port', 'None') + "," + \
+                       r.get('type', 'None') + "," + r.get('protocol', 'None') + "," + \
+                       r.get('location', 'None') + "," + r.get('time', 'None')
                 print "[*]", line
                 ff.writelines((line+"\n").encode("utf8"))
