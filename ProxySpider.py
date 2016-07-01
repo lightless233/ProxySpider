@@ -9,6 +9,9 @@ from utils.ThreadPool import ThreadPool
 __author__ = "lightless"
 __email__ = "root@lightless.me"
 
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 if __name__ == "__main__":
     # 加载爬虫插件
     al = AutoLoad()
