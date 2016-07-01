@@ -19,15 +19,16 @@ __email__ = "root@lightless.me"
           ip： 代理地址的IP
           port： 代理地址的端口
           type： 代理类型，一般为 "透明，匿名，高匿" 其中之一，根据自己爬取的结果填充，若所爬页面未提供该值，填充为None即可。
+          protocol： 代理支持的协议，HTTP/HTTPS，根据爬取的结果进行填充，若未提供该值，填充为None。
           location： 该代理IP的位置，根据自己爬取的结果进行填充，若所爬页面未提供该值，填充为None即可。
           time： 该代理IP的响应时间，单位为秒。
           结果集格式如下：
           [
             {"url": self.url, "type": self.type, "tag": self.tag},
             [
-                {"ip": "33.44.55.66", "port": "80", "type": "高匿", "location": "中国 江苏省 苏州市 电信", "time": "0.3"},
-                {"ip": "11.22.33.44", "port": "3128", "type": "透明", "location": "中国 河南省 洛阳市 电信", "time": "2.7"},
-                {"ip": "22.33.44.55", "port": "8888", "type": "匿名", "location": "Taiwan", "time": "5.6"},
+                {"ip": "33.44.55.66", "port": "80", "type": "高匿", "protocol": "HTTP", "location": "中国 江苏省 苏州市 电信", "time": "0.3"},
+                {"ip": "11.22.33.44", "port": "3128", "type": "透明", "protocol": "HTTPS", "location": "中国 河南省 洛阳市 电信", "time": "2.7"},
+                {"ip": "22.33.44.55", "port": "8888", "type": "匿名", "protocol": "HTTP/HTTPS", "location": "Taiwan", "time": "5.6"},
                 ...
             ]
           ]
@@ -57,9 +58,9 @@ class ExampleSpider:
         # TODO: Add your process here...
         # TODO: delete these lines below, just an example...
         t = []
-        s = {"ip": "11.22.33.44", "port": "8080", "type": u"透明", "location": u"Taiwan", "time": "2.6"}
+        s = {"ip": "11.22.33.44", "port": "8080", "type": u"透明", "protocol": "HTTP", "location": u"Taiwan", "time": "2.6"}
         t.append(s)
-        s = {"ip": "22.33.44.55", "port": "3128", "type": u"高匿", "location": u"江苏省南京市 联通", "time": "5"}
+        s = {"ip": "22.33.44.55", "port": "3128", "type": u"高匿", "protocol": "HTTPS/HTTP", "location": u"江苏省南京市 联通", "time": "5"}
         t.append(s)
         tt = [{
             "url": self.url,

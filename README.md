@@ -45,9 +45,9 @@ class ExampleSpider:    # 文件名与类名相同。因为本文件仅作为示
         # TODO: Add your process here...
         # TODO: delete these lines below, just an example...
         t = []
-        s = {"ip": "11.22.33.44", "port": "8080", "type": u"透明", "location": u"Taiwan", "time": "2.6"}
+        s = {"ip": "11.22.33.44", "port": "8080", "type": u"透明", "protocol": "HTTP", "location": u"Taiwan", "time": "2.6"}
         t.append(s)
-        s = {"ip": "22.33.44.55", "port": "3128", "type": u"高匿", "location": u"江苏省南京市 联通", "time": "5"}
+        s = {"ip": "22.33.44.55", "port": "3128", "type": u"高匿", "protocol": "HTTPS", "location": u"江苏省南京市 联通", "time": "5"}
         t.append(s)
         tt = [{
             "url": self.url,
