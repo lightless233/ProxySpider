@@ -2,9 +2,11 @@
 # coding: utf-8
 import datetime
 import time
+import os
 
 import requests
 from bs4 import BeautifulSoup
+from selenium import webdriver
 
 __author__ = "lightless"
 __email__ = "root@lightless.me"
@@ -22,16 +24,25 @@ class KDLHASpider:
 
     def run(self):
         # http://www.kuaidaili.com/free/inha/1/ - http://www.kuaidaili.com/free/inha/10/
-        raw_url = "http://www.kuaidaili.com/free/inha/{page}/"
+        # http://www.kuaidaili.com/free/inha/10/?yundun=0f66aeff541e04037821
+        raw_url = "http://www.kuaidaili.com/free/inha/{page}/?yundun=0f66aeff541e04037821"
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.63 Safari/537.36"
+            "User-Agent": "Mozilla/4.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.63 Safari/537.36"
         }
         t_result = []
-        for page in xrange(1, 11):
-
+        for page in xrange(1, 2):
             url = raw_url.replace("{page}", str(page))
+
+            cur_path = os.getcwd()
+            cur_path += os.sep + "spiders" + os.sep + "phantomjs.exe"
+            driver = webdriver.PhantomJS(executable_path=cur_path)
+            driver.set_window_size(1120, 550)
+            driver.get(url)
+            print driver.current_url
+
             r = requests.get(url, headers=headers)
             raw_html = r.text
+            print raw_html
             soup = BeautifulSoup(raw_html, "lxml")
 
             for tr in soup.find_all("tr")[1:]:
