@@ -15,6 +15,7 @@ class KPSpider:
         self.tag = "鲲鹏-全球-每日更新"
         self.type = "HTTP"
         self.result_queue = None
+        self.phantomjs_path = None
 
     def set_result_queue(self, result_queue):
         self.result_queue = result_queue
@@ -22,8 +23,8 @@ class KPSpider:
     def run(self):
 
         url = self.url
-        phantom_path = os.getcwd() + os.sep + "spiders" + os.sep + "phantomjs.exe"
-        driver = webdriver.PhantomJS(executable_path=phantom_path)
+        print url
+        driver = webdriver.PhantomJS(executable_path=self.phantomjs_path)
         driver.get(url)
         raw_html = driver.execute_script("return document.getElementsByTagName('html')[0].innerHTML")
 

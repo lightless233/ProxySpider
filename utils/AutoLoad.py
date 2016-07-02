@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 import os
+import sys
 import Queue
+import platform
 
 __author__ = "lightless"
 __email__ = "root@lightless.me"
@@ -25,6 +27,14 @@ class AutoLoad:
         spider_class = spider.get_spider_class()
         o = spider_class()
         o.set_result_queue(self.results)
+        # TODO: set phantomjs path
+        if "Windows" in platform.system():
+            o.phantomjs_path = os.getcwd() + os.sep + "spiders" + os.sep + "phantomjs.exe"
+        elif "Linux" in platform.system():
+            o.phantomjs_path = os.getcwd() + os.sep + "spiders" + os.sep + "phantomjs"
+        else:
+            print "Unsupported operating system."
+            sys.exit(1)
         self.spiders.append(o)
 
     def load(self, cls=[]):

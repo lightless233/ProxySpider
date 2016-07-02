@@ -15,6 +15,7 @@ class KDLHASpider:
         self.tag = "快代理-每日更新"
         self.type = "HTTP"
         self.result_queue = None
+        self.phantomjs_path = None
 
     def set_result_queue(self, result_queue):
         self.result_queue = result_queue
@@ -27,13 +28,11 @@ class KDLHASpider:
         for page in xrange(1, 11):
             url = raw_url.replace("{page}", str(page))
             print url
-            cur_path = os.getcwd()
-            cur_path += os.sep + "spiders" + os.sep + "phantomjs.exe"
-            driver = webdriver.PhantomJS(executable_path=cur_path)
+            driver = webdriver.PhantomJS(executable_path=self.phantomjs_path)
             driver.get(url)
             raw_html = driver.execute_script("return document.getElementsByTagName('html')[0].innerHTML")
 
-            soup = BeautifulSoup(raw_html, "lxml")
+            soup = BeautifulSoup(raw_html, "html5lib")
             for tr in soup.find_all("tr")[1:]:
                 each_item = {}
                 td = tr.find_all("td")
