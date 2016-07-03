@@ -5,6 +5,9 @@ import Queue
 import threading
 from multiprocessing import cpu_count
 
+__author__ = "lightless"
+__email__ = "root@lightless.me"
+
 
 class ThreadPool:
     def __init__(self, thread_count=cpu_count()):
@@ -29,6 +32,7 @@ class ThreadPool:
 
         # 开始多线程运行工作函数
         for t in self.__thread_list:
+            print "[*]", t.getName(), "started."
             t.start()
         for t in self.__thread_list:
             t.join()
