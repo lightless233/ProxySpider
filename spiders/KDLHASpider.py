@@ -1,24 +1,21 @@
 #!/usr/bin/env python
 # coding: utf-8
-import os
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
+
+from utils.SpiderBase import SpiderBase
 
 __author__ = "lightless"
 __email__ = "root@lightless.me"
 
 
-class KDLHASpider:
+class KDLHASpider(SpiderBase):
     def __init__(self):
+        SpiderBase.__init__(self)
         self.url = "http://www.kuaidaili.com/free/inha/"
         self.tag = "快代理-每日更新"
         self.type = "HTTP"
-        self.result_queue = None
-        self.phantomjs_path = None
-
-    def set_result_queue(self, result_queue):
-        self.result_queue = result_queue
 
     def run(self):
         # http://www.kuaidaili.com/proxylist/1/

@@ -18,7 +18,7 @@ if __name__ == "__main__":
     # 如果没有参数，加载全部插件
     al.load()
     # 如果想加载指定插件，可采用下面的写法
-    # al.load(cls=["KDLHASpider"])
+    # al.load(cls=["KPSpider"])
 
     print "Loaded spider: ",
     for s in al.spiders:
