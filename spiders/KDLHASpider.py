@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 
 from utils.SpiderBase import SpiderBase
+from utils.LoggerHelp import logger
 
 __author__ = "lightless"
 __email__ = "root@lightless.me"
@@ -24,7 +25,7 @@ class KDLHASpider(SpiderBase):
         t_result = []
         for page in xrange(1, 11):
             url = raw_url.replace("{page}", str(page))
-            print url
+            logger.debug(url)
             driver = webdriver.PhantomJS(executable_path=self.phantomjs_path)
             driver.get(url)
             raw_html = driver.execute_script("return document.getElementsByTagName('html')[0].innerHTML")

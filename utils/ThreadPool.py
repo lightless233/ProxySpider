@@ -5,6 +5,8 @@ import Queue
 import threading
 from multiprocessing import cpu_count
 
+from utils.LoggerHelp import logger
+
 __author__ = "lightless"
 __email__ = "root@lightless.me"
 
@@ -32,7 +34,7 @@ class ThreadPool:
 
         # 开始多线程运行工作函数
         for t in self.__thread_list:
-            print "[*]", t.getName(), "started."
+            logger.debug("[*] " + t.getName() + " started.")
             t.start()
         for t in self.__thread_list:
             t.join()
