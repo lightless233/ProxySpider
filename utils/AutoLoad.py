@@ -39,7 +39,6 @@ class AutoLoad:
             for class_name in cls:
                 filename = class_name + ".py"
                 if self.__check_filename(filename) and os.path.exists("spiders" + os.sep +  class_name + ".py"):
-                    print filename
                     self.load_spider(filename)
 
 

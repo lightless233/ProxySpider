@@ -9,7 +9,7 @@ __author__ = "lightless"
 __email__ = "root@lightless.me"
 
 
-class SpiderBase:
+class SpiderBase(object):
     def __init__(self):
         self.result_queue = None
         self.phantomjs_path = None

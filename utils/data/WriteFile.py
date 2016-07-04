@@ -10,12 +10,12 @@ __email__ = "root@lightless.me"
 
 
 def write_file(results_queue, thread_pool, filename="proxy-ip-list.csv"):
-    logger.debug("write_file called.")
     with open(filename, "w") as ff:
         # 写入BOM头
         ff.write(codecs.BOM_UTF8)
         # 写入内容
-        while not results_queue.empty() or not thread_pool.is_all_thread_dead():
+
+        while not results_queue.empty() or not thread_pool.finished:
             res = results_queue.get(block=True)
             ff.writelines(res[0].get('url') + "\n")
             ff.writelines("ip,port,type,protocol,location,time(s)\n")
@@ -27,5 +27,3 @@ def write_file(results_queue, thread_pool, filename="proxy-ip-list.csv"):
                        r.get('location', 'None') + "," + r.get('time', 'None')
                 logger.info("[*] " + line)
                 ff.writelines((line+"\n").encode("utf8"))
-
-

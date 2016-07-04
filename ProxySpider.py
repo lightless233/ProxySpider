@@ -27,11 +27,11 @@ if __name__ == "__main__":
 
     message = "Loaded spiders: "
     for s in al.spiders:
-        message += str(s.__class__).split(".")[-1] + ", "
-    logger.info(message)
+        message += str(s.__class__).split(".")[-1].split("'")[0] + ", "
+    logger.info(message.strip(", "))
 
     # 创建线程池
-    tp = ThreadPool()
+    tp = ThreadPool(1)
     for sp in al.spiders:
         # 将spider中的run方法添加到线程池中
         tp.add_function(sp.run)
