@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-import codecs
 import sys
 
 from utils.AutoLoad import AutoLoad
