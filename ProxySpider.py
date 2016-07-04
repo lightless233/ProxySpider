@@ -6,6 +6,7 @@ import sys
 from utils.AutoLoad import AutoLoad
 from utils.ThreadPool import ThreadPool
 from utils.LoggerHelp import logger
+from utils.data.WriteFile import write_file
 
 __author__ = "lightless"
 __email__ = "root@lightless.me"
@@ -37,24 +38,9 @@ if __name__ == "__main__":
         tp.add_function(sp.run)
 
     # 开始爬取代理部分
-    tp.run()
+    tp.run(join=False)
 
-    logger.info("All done. Writing files...")
-    # 解析结果，并写入文件
-    with open("proxy-ip-list.csv", "w") as ff:
-
-        # 写入BOM头
-        ff.write(codecs.BOM_UTF8)
-        # TODO: fix get value from dict
-        while not al.results.empty():
-            res = al.results.get_nowait()
-            ff.writelines(res[0].get('url') + "\n")
-            ff.writelines("ip,port,type,protocol,location,time(s)\n")
-            logger.info("[*] url: " + res[0].get('url'))
-            res = res[1]
-            for r in res:
-                line = r.get('ip', 'None') + "," + r.get('port', 'None') + "," + \
-                       r.get('type', 'None') + "," + r.get('protocol', 'None') + "," + \
-                       r.get('location', 'None') + "," + r.get('time', 'None')
-                logger.info("[*] " + line)
-                ff.writelines((line+"\n").encode("utf8"))
+    # 输出结果到文件中
+    write_file_tp = ThreadPool()
+    write_file_tp.add_function(write_file, results_queue=al.results, thread_pool=tp)
+    write_file_tp.run()

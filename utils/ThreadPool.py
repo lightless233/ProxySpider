@@ -7,11 +7,13 @@ from multiprocessing import cpu_count
 
 from utils.LoggerHelp import logger
 
+__all__ = ["ThreadPool"]
+
 __author__ = "lightless"
 __email__ = "root@lightless.me"
 
 
-class ThreadPool:
+class ThreadPool(object):
     def __init__(self, thread_count=cpu_count()):
         self.__thread_count = thread_count
         self.__function_list = Queue.Queue(maxsize=0)
@@ -25,7 +27,7 @@ class ThreadPool:
         if callable(func):
             self.__function_list.put((func, kwargs))
 
-    def run(self):
+    def run(self, join=True):
         # 从队列中获取工作函数
         while not self.__function_list.empty():
             fn = self.__function_list.get_nowait()
@@ -40,8 +42,18 @@ class ThreadPool:
         for t in self.__thread_list:
             logger.debug("[*] " + t.getName() + " started.")
             t.start()
-        for t in self.__thread_list:
-            t.join()
+        if join:
+            for t in self.__thread_list:
+                t.join()
 
-    def print_functions(self):
-        print self.__function_list
+    def is_all_thread_dead(self):
+        flags = True
+        for t in self.__thread_list:
+            if t.is_alive():
+                logger.debug("[*] " + t.getName() + " is still working.")
+                flags = False
+        return flags
+
+    @staticmethod
+    def get_all_threads():
+        return threading.enumerate()

@@ -7,7 +7,7 @@ __email__ = "root@lightless.me"
 
 
 console = logging.StreamHandler()
-formatter = logging.Formatter("[%(levelname)s] [%(asctime)s] [%(filename)s:%(lineno)d] %(message)s", "%H:%M:%S")
+formatter = logging.Formatter("[%(levelname)s] [(%(threadName)s)] [%(asctime)s] [%(filename)s:%(lineno)d] %(message)s", "%H:%M:%S")
 console.setFormatter(formatter)
 
 logger = logging.getLogger("ProxySpiderLogger")
