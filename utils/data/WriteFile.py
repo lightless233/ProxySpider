@@ -3,7 +3,7 @@
 
 import codecs
 
-from utils.LoggerHelp import logger
+from utils.data.LoggerHelp import logger
 
 __author__ = "lightless"
 __email__ = "root@lightless.me"

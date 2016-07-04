@@ -5,7 +5,7 @@ import Queue
 import threading
 from multiprocessing import cpu_count
 
-from utils.LoggerHelp import logger
+from utils.data.LoggerHelp import logger
 
 __all__ = ["ThreadPool"]
 

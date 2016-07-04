@@ -4,7 +4,7 @@ import sys
 
 from utils.AutoLoad import AutoLoad
 from utils.ThreadPool import ThreadPool
-from utils.LoggerHelp import logger
+from utils.data.LoggerHelp import logger
 from utils.data.WriteFile import write_file
 
 __author__ = "lightless"
