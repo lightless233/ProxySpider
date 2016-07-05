@@ -17,9 +17,9 @@ if __name__ == "__main__":
     # 加载爬虫插件
     al = AutoLoad()
     # 如果没有参数，加载全部插件
-    al.load()
+    # al.load()
     # 如果想加载指定插件，可采用下面的写法
-    # al.load(cls=["KPSpider"])
+    al.load("KPSpider", "KDLHASpider")
 
     if not len(al.spiders):
         logger.error("No Spiders loaded, exit.")
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     logger.info(message.strip(", "))
 
     # 创建线程池
-    tp = ThreadPool(1)
+    tp = ThreadPool()
     for sp in al.spiders:
         # 将spider中的run方法添加到线程池中
         tp.add_function(sp.run)

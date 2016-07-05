@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 import os
-import sys
 import Queue
-import platform
 
 __author__ = "lightless"
 __email__ = "root@lightless.me"
@@ -15,7 +13,8 @@ class AutoLoad:
         self.spiders = []
         self.results = Queue.Queue(maxsize=0)
 
-    def __check_filename(self, filename):
+    @staticmethod
+    def __check_filename(filename):
         if not filename.endswith(".py") or filename.startswith("_"):
             return False
         else:
@@ -30,7 +29,7 @@ class AutoLoad:
         o.set_phantomjs_path()
         self.spiders.append(o)
 
-    def load(self, cls=[]):
+    def load(self, *cls):
         if not cls:
             for filename in os.listdir("spiders"):
                 if self.__check_filename(filename):
@@ -38,7 +37,7 @@ class AutoLoad:
         else:
             for class_name in cls:
                 filename = class_name + ".py"
-                if self.__check_filename(filename) and os.path.exists("spiders" + os.sep +  class_name + ".py"):
+                if self.__check_filename(filename) and os.path.exists("spiders" + os.sep + class_name + ".py"):
                     self.load_spider(filename)
 
 
