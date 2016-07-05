@@ -17,7 +17,7 @@ __email__ = "root@lightless.me"
 class ThreadPool(object):
     def __init__(self, thread_count=cpu_count()*2):
         self.__thread_count = thread_count
-        self.__function_list = Queue.Queue(maxsize=0)
+        self.__function_list = Queue.Queue()
         self.__thread_list = []
         self.__alive_thread_counts = 0
         self.__working_thread_list = []
@@ -44,7 +44,7 @@ class ThreadPool(object):
             self.__thread_list.append(t)
 
         tt = threading.Thread(target=self._run, args=(join,), name="really_run")
-        tt.setDaemon(True)
+        # tt.setDaemon(True)
         tt.start()
         # tt.join()
 

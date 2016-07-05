@@ -11,7 +11,7 @@ class AutoLoad:
 
     def __init__(self):
         self.spiders = []
-        self.results = Queue.Queue(maxsize=0)
+        self.results = Queue.Queue()
 
     @staticmethod
     def __check_filename(filename):
