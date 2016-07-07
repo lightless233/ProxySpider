@@ -18,7 +18,7 @@ class Proxy(Base):
     __tablename__ = "proxy"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    ip = Column(String(16), unique=True, default=None, nullable=True)
+    ip = Column(String(16), index=True, default=None, nullable=True)
     port = Column(String(5), default=None, nullable=True)
     proxy_type = Column(String(32), default=None, nullable=True)
     location = Column(String(128), default=None, nullable=True)

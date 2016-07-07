@@ -5,7 +5,7 @@ import sys
 from utils.AutoLoad import AutoLoad
 from utils.ThreadPool import ThreadPool
 from utils.data.LoggerHelp import logger
-from utils.data.WriteFile import write_file
+from utils.data.SaveData import SaveData
 
 __author__ = "lightless"
 __email__ = "root@lightless.me"
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     logger.info(message.strip(", "))
 
     # 创建线程池
-    tp = ThreadPool(1)
+    tp = ThreadPool()
     for sp in al.spiders:
         # 将spider中的run方法添加到线程池中
         tp.add_function(sp.run)
@@ -39,7 +39,8 @@ if __name__ == "__main__":
     # 开始爬取代理部分
     tp.run(join=False)
 
-    # 输出结果到文件中
+    # 输出结果到文件和数据库中
+    sd = SaveData(al.results, tp)
     write_file_tp = ThreadPool()
-    write_file_tp.add_function(write_file, results_queue=al.results, thread_pool=tp)
+    write_file_tp.add_function(sd.write)
     write_file_tp.run()
