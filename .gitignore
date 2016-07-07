@@ -90,3 +90,4 @@ ENV/
 
 .idea/
 proxy-ip-list.csv
+config.ini
