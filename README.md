@@ -1,6 +1,10 @@
 # ProxySpider V1.0
 基于插件化的多线程代理地址爬虫框架。
 
+**项目请移步到https://github.com/LiGhT1EsS/Pansidong**
+
+**该爬虫已经作为一个模块封装到“盘丝洞”中。**
+
 ## 目录结构
 ```
 ProxySpider         # 主目录
